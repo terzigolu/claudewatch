@@ -1,6 +1,5 @@
 import { CELL_KEYS, type CellKey, type Config } from '@/types';
-
-const DEFAULT_BREAKPOINT = 113;
+import { DEFAULT_BREAKPOINT } from '@/constants';
 
 /**
  * Default README example config — 2x2 wide, 1x3 compact.

@@ -1,8 +1,6 @@
 import type { CellKey, Config } from '@/types';
 import { computeLayout } from './statusline-mock';
-
-const MIN_BREAKPOINT = 80;
-const MAX_BREAKPOINT = 160;
+import { MIN_BREAKPOINT, MAX_BREAKPOINT } from '@/constants';
 
 /**
  * Build a ccwatch config object from the wizard state.

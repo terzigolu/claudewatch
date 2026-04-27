@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 import type { CellKey, SessionMock } from '@/types';
-
-const MIN_BREAKPOINT = 80;
-const MAX_BREAKPOINT = 160;
-
-const DEFAULT_ENABLED: ReadonlyArray<CellKey> = ['5h', '7d', 'session', 'ctxbar'];
-const DEFAULT_BREAKPOINT = 113;
+import {
+  MIN_BREAKPOINT,
+  MAX_BREAKPOINT,
+  DEFAULT_BREAKPOINT,
+  DEFAULT_ENABLED_CELLS,
+} from '@/constants';
 
 const DEFAULT_SESSION_MOCK: SessionMock = {
   cost: 0.42,
@@ -27,7 +27,7 @@ export interface WizardStore {
 }
 
 export const useWizardStore = create<WizardStore>((set) => ({
-  enabledCells: new Set(DEFAULT_ENABLED),
+  enabledCells: new Set(DEFAULT_ENABLED_CELLS),
   breakpoint: DEFAULT_BREAKPOINT,
   sessionMock: { ...DEFAULT_SESSION_MOCK },
 
@@ -49,7 +49,7 @@ export const useWizardStore = create<WizardStore>((set) => ({
 
   reset: () =>
     set({
-      enabledCells: new Set(DEFAULT_ENABLED),
+      enabledCells: new Set(DEFAULT_ENABLED_CELLS),
       breakpoint: DEFAULT_BREAKPOINT,
       sessionMock: { ...DEFAULT_SESSION_MOCK },
     }),
