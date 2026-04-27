@@ -51,7 +51,7 @@ export function Demo() {
   };
 
   return (
-    <section className="border-t border-amber-dim/20 px-8 py-20" id="demo">
+    <section className="border-t border-amber-dim/20 px-4 sm:px-6 lg:px-8 py-16 lg:py-20" id="demo">
       <h2 className="font-mono text-sm uppercase tracking-widest text-amber-dim">
         // Build your statusline
       </h2>
