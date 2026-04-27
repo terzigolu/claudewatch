@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a0f00"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="bezel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8c8a0"/>
+      <stop offset="0.5" stop-color="#c9b88a"/>
+      <stop offset="1" stop-color="#a89668"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle scanline texture -->
+  <g opacity="0.05">
+    <pattern id="scan" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#ffb000"/>
+    </pattern>
+    <rect width="1200" height="630" fill="url(#scan)"/>
+  </g>
+
+  <!-- CRT body -->
+  <g transform="translate(60 80)">
+    <rect x="0" y="0" width="500" height="380" rx="24" fill="url(#bezel)"/>
+    <!-- Screen recess -->
+    <rect x="35" y="35" width="430" height="280" rx="14" fill="#060300"/>
+    <!-- Screen content -->
+    <g transform="translate(60 75)" font-family="JetBrains Mono, monospace" fill="#ffb000">
+      <!-- Row 1 -->
+      <text x="0" y="0" font-size="14" fill="#806000">5H</text>
+      <text x="380" y="0" font-size="14" fill="#fff8e1" text-anchor="end">2h 14m</text>
+      <rect x="0" y="14" width="380" height="10" fill="#000"/>
+      <rect x="0" y="14" width="120" height="10" fill="#ffb000"/>
+      <!-- Row 2 -->
+      <text x="0" y="64" font-size="14" fill="#806000">7D</text>
+      <text x="380" y="64" font-size="14" fill="#fff8e1" text-anchor="end">3d 02h</text>
+      <rect x="0" y="78" width="380" height="10" fill="#000"/>
+      <rect x="0" y="78" width="240" height="10" fill="#ff6700"/>
+      <!-- Row 3 -->
+      <text x="0" y="128" font-size="14" fill="#806000">SESSION</text>
+      <text x="0" y="156" font-size="22" fill="#ffb000">$2.41 · $1.40/h</text>
+    </g>
+    <!-- LED + brand strip -->
+    <circle cx="55" cy="345" r="6" fill="#ff6700"/>
+    <text x="68" y="349" font-family="JetBrains Mono, monospace" font-size="10" fill="#5a4828" font-weight="700" letter-spacing="2">POWER</text>
+    <text x="465" y="349" font-family="JetBrains Mono, monospace" font-size="10" fill="#5a4828" font-weight="700" text-anchor="end" letter-spacing="2">CCWATCH V1.0.1</text>
+  </g>
+
+  <!-- Right column: tagline + tagline -->
+  <g transform="translate(620 200)" font-family="Geist, sans-serif" fill="#ffb000">
+    <text x="0" y="0" font-size="22" fill="#806000" font-family="JetBrains Mono, monospace" letter-spacing="3">[ CCWATCH V1.0.1 ]</text>
+    <text x="0" y="60" font-size="56" font-weight="500">watch the meter,</text>
+    <text x="0" y="118" font-size="56" font-weight="500">not the bill</text>
+    <text x="0" y="170" font-size="22" fill="#fff8e1" opacity="0.85" font-family="JetBrains Mono, monospace">Fast cost &amp; quota statusline</text>
+    <text x="0" y="200" font-size="22" fill="#fff8e1" opacity="0.85" font-family="JetBrains Mono, monospace">for Claude Code. Zero deps.</text>
+    <!-- Stats -->
+    <g transform="translate(0 256)" font-family="JetBrains Mono, monospace" fill="#806000" font-size="18">
+      <text>~80ms warm render · 0 runtime deps</text>
+    </g>
+  </g>
+</svg>
