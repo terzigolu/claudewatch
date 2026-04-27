@@ -33,19 +33,19 @@ One-time setup (requires Cloudflare account, free tier is fine):
    | Node.js version      | `20`                                   |
 
    Repo-root `wrangler.toml` declares `name = "ccwatch"` (→ subdomain) and
-   `pages_build_output_dir = "./site/dist"`. If `ccwatch.pages.dev` is
+   `pages_build_output_dir = "./site/dist"`. If `ccwatch.yajinn.workers.dev` is
    already taken on Cloudflare, edit the `name` field to something else
    (e.g. `ccwatch-app`) and commit.
 
 4. **Save and Deploy**. First build takes 60–90s. Subsequent builds are <30s.
-5. Site is live at `https://ccwatch.pages.dev/` (or your chosen subdomain).
+5. Site is live at `https://ccwatch.yajinn.workers.dev/` (or your chosen subdomain).
 6. Every push to `main` and every PR triggers a deploy. PRs get preview URLs.
 
 ### Custom domain (optional)
 
 If you have `ccwatch.dev` (or similar):
 - Cloudflare dashboard → Pages → ccwatch → Custom domains → Set up a custom domain
-- Add CNAME record pointing to `ccwatch.pages.dev`
+- Add CNAME record pointing to `ccwatch.yajinn.workers.dev`
 - HTTPS is automatic
 
 After custom domain is wired, update `index.html`:
