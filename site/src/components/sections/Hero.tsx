@@ -27,8 +27,8 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="px-8 pt-16 pb-20">
-      <div className="grid gap-12 lg:grid-cols-[55%_45%]">
+    <section className="px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-16 sm:pb-20">
+      <div className="grid gap-8 lg:gap-12 lg:grid-cols-[55%_45%]">
         {/* Left: CSS vintage monitor body wrapping a live 3D scene (or HTML fallback) */}
         <div className="aspect-[4/3] flex items-center justify-center">
           <CRTFrame>
@@ -49,7 +49,7 @@ export function Hero() {
           <p className="font-mono text-xs uppercase tracking-widest text-amber-dim">
             [ ccwatch v1.0.1 ]
           </p>
-          <h1 className="mt-3 font-display text-5xl leading-[1.05] sm:text-6xl">
+          <h1 className="mt-3 font-display text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
             <GlitchText>watch the meter,</GlitchText>
             <br />
             <GlitchText>not the bill</GlitchText>

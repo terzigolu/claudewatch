@@ -11,7 +11,7 @@ export function Accurate() {
   const usage = { input: 100_000, output: 100_000, cacheRead: 0 };
 
   return (
-    <section className="border-t border-amber-dim/20 px-8 py-20 bg-black/20">
+    <section className="border-t border-amber-dim/20 px-4 sm:px-6 lg:px-8 py-16 lg:py-20 bg-black/20">
       <h2 className="font-display text-3xl">
         Opus output is <span className="text-amber-glow">19×</span> more expensive than Haiku.
       </h2>

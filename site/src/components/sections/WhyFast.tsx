@@ -18,7 +18,7 @@ const CARDS = [
 
 export function WhyFast() {
   return (
-    <section className="border-t border-amber-dim/20 px-8 py-20">
+    <section className="border-t border-amber-dim/20 px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
       <h2 className="font-mono text-sm uppercase tracking-widest text-amber-dim">
         // Why it&apos;s fast
       </h2>
