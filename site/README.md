@@ -21,21 +21,21 @@ One-time setup (requires Cloudflare account, free tier is fine):
 
 1. **Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git**
 2. Authorize Cloudflare to access the GitHub repo `terzigolu/ccwatch`
-3. Configure the build (Cloudflare's new unified flow detects `site/wrangler.toml`):
+3. Configure the build (Cloudflare's unified UI detects `wrangler.toml` at repo root):
 
-   | Setting              | Value                       |
-   |----------------------|-----------------------------|
-   | Production branch    | `main`                      |
-   | Framework preset     | `None`                      |
-   | **Root directory**   | `site`                      |
-   | Build command        | `npm ci && npm run build`   |
-   | Build output         | `dist`                      |
-   | Node.js version      | `20`                        |
+   | Setting              | Value                                  |
+   |----------------------|----------------------------------------|
+   | Production branch    | `main`                                 |
+   | Framework preset     | `None`                                 |
+   | Root directory       | `/` (default — leave empty)            |
+   | Build command        | `cd site && npm ci && npm run build`   |
+   | Build output         | `site/dist`                            |
+   | Node.js version      | `20`                                   |
 
-   `site/wrangler.toml` declares `name = "ccwatch"` (→ subdomain) and
-   `pages_build_output_dir = "dist"`. If `ccwatch.pages.dev` is already
-   taken on Cloudflare, edit the `name` field to something else (e.g.
-   `ccwatch-app`) and commit.
+   Repo-root `wrangler.toml` declares `name = "ccwatch"` (→ subdomain) and
+   `pages_build_output_dir = "./site/dist"`. If `ccwatch.pages.dev` is
+   already taken on Cloudflare, edit the `name` field to something else
+   (e.g. `ccwatch-app`) and commit.
 
 4. **Save and Deploy**. First build takes 60–90s. Subsequent builds are <30s.
 5. Site is live at `https://ccwatch.pages.dev/` (or your chosen subdomain).
