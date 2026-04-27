@@ -5,6 +5,8 @@
 [![npm](https://img.shields.io/npm/v/claudewatch?style=flat-square&color=blue)](https://www.npmjs.com/package/claudewatch)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
+![claudewatch preview](assets/preview.jpg)
+
 ## One-line install
 
 ```bash
