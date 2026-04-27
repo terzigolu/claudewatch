@@ -31,6 +31,8 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
+  /* z-index 1000 sits above page content but below typical modal layers (>= 9999),
+     intentional — scanline shouldn't reduce modal legibility */
   z-index: 1000;
   background: repeating-linear-gradient(
     to bottom,
