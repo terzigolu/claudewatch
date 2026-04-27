@@ -42,7 +42,17 @@
   "bugs": {
     "url": "https://github.com/terzigolu/claudewatch/issues"
   },
-  "author": "terzigolu",
+  "author": "yajinn & terzigolu",
+  "contributors": [
+    {
+      "name": "yajinn",
+      "url": "https://github.com/yajinn"
+    },
+    {
+      "name": "terzigolu",
+      "url": "https://github.com/terzigolu"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "@types/node": "22",

@@ -114,6 +114,13 @@ Or via Claude Code:
 /plugin remove claudewatch
 ```
 
+## Authors
+
+Built and maintained by:
+
+- [yajinn](https://github.com/yajinn)
+- [terzigolu](https://github.com/terzigolu)
+
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE).
