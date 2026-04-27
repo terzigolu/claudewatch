@@ -8,7 +8,17 @@
 // Copies this package's contents into ~/.claude/plugins/cache/terzigolu/ccwatch/<version>/
 // then patches ~/.claude/settings.json so statusLine.command points at the launcher.
 import { existsSync } from "node:fs";
-import { copyFile, cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import {
+  copyFile,
+  cp,
+  lstat,
+  mkdir,
+  readFile,
+  rename,
+  rm,
+  symlink,
+  writeFile,
+} from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -21,16 +31,26 @@ const VERSION = PKG_JSON.version || "1.0.0";
 const HOME = os.homedir();
 const PLUGINS_CACHE = path.join(HOME, ".claude", "plugins", "cache", "terzigolu", "ccwatch");
 const PLUGIN_DIR = path.join(PLUGINS_CACHE, VERSION);
+const CURRENT_LINK = path.join(PLUGINS_CACHE, "current");
 const SETTINGS_PATH = path.join(HOME, ".claude", "settings.json");
 const CONFIG_DIR = path.join(HOME, ".claude", "plugins", "ccwatch");
 const CONFIG_PATH = path.join(CONFIG_DIR, "config.json");
 
 const LAUNCHER_COMMAND =
   "sh -lc '" +
-  'PLUGIN_DIR=$(find "$HOME/.claude/plugins/cache" -mindepth 3 -maxdepth 3 -type d -path "*/ccwatch/*" 2>/dev/null | sort | tail -n 1); ' +
+  'PLUGIN_DIR="$HOME/.claude/plugins/cache/terzigolu/ccwatch/current"; ' +
+  '[ -d "$PLUGIN_DIR" ] || PLUGIN_DIR=$(find "$HOME/.claude/plugins/cache" -mindepth 3 -maxdepth 3 -type d -path "*/ccwatch/*" 2>/dev/null | sort | tail -n 1); ' +
   '[ -n "$PLUGIN_DIR" ] || exit 0; ' +
   'exec node "$PLUGIN_DIR/dist/cli.js"' +
   "'";
+
+function isCcwatchCommand(command) {
+  return (
+    typeof command === "string" &&
+    command.includes("ccwatch") &&
+    command.includes("dist/cli.js")
+  );
+}
 
 function log(msg) {
   process.stdout.write(`[ccwatch] ${msg}\n`);
@@ -52,6 +72,30 @@ async function ensurePluginCopied() {
     },
   });
   log(`copied plugin → ${PLUGIN_DIR}`);
+}
+
+async function updateCurrentSymlink() {
+  const tmpLink = path.join(PLUGINS_CACHE, `current.${process.pid}.tmp`);
+  try {
+    await rm(tmpLink, { force: true });
+    await symlink(VERSION, tmpLink);
+    await rename(tmpLink, CURRENT_LINK);
+    log(`linked current → ${VERSION}`);
+  } catch (err) {
+    await rm(tmpLink, { force: true }).catch(() => {});
+    log(`warning: could not update 'current' symlink (${err.message}); fallback path resolution will be used`);
+  }
+}
+
+async function removeCurrentSymlink() {
+  try {
+    const stat = await lstat(CURRENT_LINK);
+    if (stat.isSymbolicLink() || stat.isFile() || stat.isDirectory()) {
+      await rm(CURRENT_LINK, { recursive: true, force: true });
+    }
+  } catch {
+    // not present, nothing to do
+  }
 }
 
 async function loadSettings() {
@@ -101,6 +145,7 @@ async function ensureConfig() {
 async function install() {
   log(`installing ccwatch v${VERSION}`);
   await ensurePluginCopied();
+  await updateCurrentSymlink();
   await wireStatusline();
   await ensureConfig();
   log("done. open Claude Code — the statusline should appear immediately.");
@@ -109,12 +154,13 @@ async function install() {
 
 async function uninstall() {
   log("uninstalling ccwatch");
+  await removeCurrentSymlink();
   if (existsSync(PLUGINS_CACHE)) {
     await rm(PLUGINS_CACHE, { recursive: true, force: true });
     log(`removed ${PLUGINS_CACHE}`);
   }
   const settings = await loadSettings();
-  if (settings.statusLine?.command === LAUNCHER_COMMAND) {
+  if (isCcwatchCommand(settings.statusLine?.command)) {
     delete settings.statusLine;
     await saveSettings(settings);
     log("cleared statusLine from settings.json");
