@@ -2,7 +2,7 @@
 
 **Fast cost & quota statusline for Claude Code.** Cached transcript scanning, configurable visibility, dedicated context bar.
 
-[![npm](https://img.shields.io/npm/v/ccwatch?style=flat-square&color=blue)](https://www.npmjs.com/package/ccwatch)
+[![npm](https://img.shields.io/npm/v/@terzigolu/ccwatch?style=flat-square&color=blue)](https://www.npmjs.com/package/@terzigolu/ccwatch)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
 ![ccwatch preview](assets/preview.jpg)
@@ -10,7 +10,7 @@
 ## One-line install
 
 ```bash
-npx ccwatch
+npx @terzigolu/ccwatch
 ```
 
 That's it. Open Claude Code — the statusline appears immediately. Then run `/ccwatch` inside Claude Code to choose which fields you want visible.
@@ -18,7 +18,7 @@ That's it. Open Claude Code — the statusline appears immediately. Then run `/c
 To remove:
 
 ```bash
-npx ccwatch uninstall
+npx @terzigolu/ccwatch uninstall
 ```
 
 ## Alternative: install as a Claude Code plugin
@@ -107,7 +107,7 @@ stdin JSON → ccwatch CLI → cached scan of ~/.claude/projects/**/*.jsonl
 ## Uninstall
 
 ```bash
-npx ccwatch uninstall
+npx @terzigolu/ccwatch uninstall
 ```
 
 Or via Claude Code:

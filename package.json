@@ -1,5 +1,5 @@
 {
-  "name": "ccwatch",
+  "name": "@terzigolu/ccwatch",
   "version": "1.0.1",
   "description": "Fast cost & quota statusline for Claude Code with cached transcript scanning and a configurable context bar.",
   "type": "module",

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // ccwatch — one-line installer for Claude Code.
-// Usage: npx ccwatch          (interactive)
-//        npx ccwatch install  (no prompt)
-//        npx ccwatch uninstall
+// Usage: npx @terzigolu/ccwatch          (interactive)
+//        npx @terzigolu/ccwatch install  (no prompt)
+//        npx @terzigolu/ccwatch uninstall
 //
 // Wires the plugin without needing /plugin marketplace add.
 // Copies this package's contents into ~/.claude/plugins/cache/terzigolu/ccwatch/<version>/
@@ -131,7 +131,7 @@ if (cmd === "uninstall" || cmd === "remove") {
   process.stdout.write(`ccwatch v${VERSION}\n`);
 } else {
   process.stdout.write(
-    "usage: npx ccwatch [install|uninstall|version]\n",
+    "usage: npx @terzigolu/ccwatch [install|uninstall|version]\n",
   );
   process.exit(1);
 }
