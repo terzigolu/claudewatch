@@ -1,8 +1,8 @@
 name = "ccwatch"
 compatibility_date = "2026-04-28"
-main = "site/worker.ts"
+main = "worker.ts"
 
 [assets]
-directory = "./site/dist"
+directory = "./dist"
 binding = "ASSETS"
 not_found_handling = "single-page-application"
