@@ -1,0 +1,265 @@
+/* Section identity decorations — keep amber CRT vocabulary,
+   give each section a distinct "dialect" using the same palette. */
+
+/* ───────────────────────────────────────────────────────────
+   Section locator chip — top-of-section position marker
+   Renders as: [ § 02 · DEMO ]
+   ─────────────────────────────────────────────────────────── */
+.section-locator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--color-amber-dim);
+  border: 1px solid color-mix(in srgb, var(--color-amber-dim) 45%, transparent);
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 0 12px rgba(255, 176, 0, 0.04);
+}
+.section-locator > .sl-mark {
+  color: var(--color-amber-glow);
+  font-weight: 700;
+}
+.section-locator > .sl-divider {
+  color: color-mix(in srgb, var(--color-amber-dim) 60%, transparent);
+}
+
+/* ───────────────────────────────────────────────────────────
+   Decorative section divider — replaces flat border-t
+   Lives inside <section> as the first child to give a richer
+   transition than a 1px hairline.
+   ─────────────────────────────────────────────────────────── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-amber-dim);
+}
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-amber-dim) 55%, transparent) 0%,
+    color-mix(in srgb, var(--color-amber-dim) 25%, transparent) 60%,
+    transparent 100%
+  );
+}
+
+/* ───────────────────────────────────────────────────────────
+   Background textures — subtle, theme-respecting
+   ─────────────────────────────────────────────────────────── */
+
+/* Dot-grid (Demo) */
+.tx-dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 176, 0, 0.08) 1px,
+    transparent 1.5px
+  );
+  background-size: 18px 18px;
+}
+
+/* Ledger lines (WhyFast) — horizontal rules every 32px */
+.tx-ledger {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    rgba(255, 176, 0, 0.045) 32px
+  );
+}
+
+/* Punched-card edge (Install) — vertical perforation on the left */
+.tx-punch-edge {
+  background-image: radial-gradient(
+    circle at 12px 50%,
+    rgba(255, 176, 0, 0.16) 0,
+    rgba(255, 176, 0, 0.16) 2px,
+    transparent 3px
+  );
+  background-size: 24px 28px;
+  background-repeat: repeat-y;
+  background-position: left top;
+}
+
+/* ───────────────────────────────────────────────────────────
+   TUI window frame — for Demo's preview
+   ─────────────────────────────────────────────────────────── */
+.tui-window {
+  border: 1px solid color-mix(in srgb, var(--color-amber-primary) 35%, transparent);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 0 32px rgba(255, 176, 0, 0.04);
+}
+.tui-window-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.875rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-amber-dim) 35%, transparent);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 176, 0, 0.09) 0%,
+    rgba(255, 176, 0, 0.02) 100%
+  );
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--color-amber-cream);
+}
+.tui-window-dots {
+  display: inline-flex;
+  gap: 0.3rem;
+}
+.tui-window-dots > span {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-amber-glow) 70%, transparent);
+  box-shadow: 0 0 4px rgba(255, 103, 0, 0.4);
+}
+.tui-window-dots > span:nth-child(2) { opacity: 0.55; }
+.tui-window-dots > span:nth-child(3) { opacity: 0.3; }
+
+.tui-window-body {
+  padding: 1rem;
+}
+
+/* ───────────────────────────────────────────────────────────
+   Corner brackets — wraps a child with ⌜⌝⌞⌟
+   Apply to a `position: relative` container.
+   ─────────────────────────────────────────────────────────── */
+.cb {
+  position: relative;
+}
+.cb::before,
+.cb::after,
+.cb > .cb-bl,
+.cb > .cb-br {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--color-amber-glow);
+  pointer-events: none;
+}
+.cb::before {
+  top: -1px; left: -1px;
+  border-top: 1.5px solid;
+  border-left: 1.5px solid;
+}
+.cb::after {
+  top: -1px; right: -1px;
+  border-top: 1.5px solid;
+  border-right: 1.5px solid;
+}
+.cb > .cb-bl {
+  bottom: -1px; left: -1px;
+  border-bottom: 1.5px solid;
+  border-left: 1.5px solid;
+}
+.cb > .cb-br {
+  bottom: -1px; right: -1px;
+  border-bottom: 1.5px solid;
+  border-right: 1.5px solid;
+}
+
+/* ───────────────────────────────────────────────────────────
+   Numbered card tab — for WhyFast benchmark cards
+   Solid amber chip with bg-color text — high contrast moment.
+   ─────────────────────────────────────────────────────────── */
+.card-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-amber-bg);
+  background: var(--color-amber-primary);
+  box-shadow: 0 0 10px rgba(255, 176, 0, 0.3);
+}
+.card-tab::before {
+  content: '▌';
+  color: var(--color-amber-glow);
+  margin-left: -0.25rem;
+}
+
+/* ───────────────────────────────────────────────────────────
+   Line-numbered code block — for Install
+   ─────────────────────────────────────────────────────────── */
+.code-listing {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+.code-listing-gutter {
+  padding: 1.25rem 0.875rem;
+  border-right: 1px solid color-mix(in srgb, var(--color-amber-dim) 35%, transparent);
+  background: rgba(255, 176, 0, 0.04);
+  color: var(--color-amber-dim);
+  text-align: right;
+  user-select: none;
+  white-space: pre;
+  line-height: 1.55;
+}
+.code-listing-content {
+  padding: 1.25rem;
+  color: var(--color-amber-cream);
+  white-space: pre;
+  overflow-x: auto;
+  line-height: 1.55;
+}
+
+/* ───────────────────────────────────────────────────────────
+   Boot prompt — terminal-style heading prefix
+   ─────────────────────────────────────────────────────────── */
+.boot-prompt {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+}
+.boot-prompt > .bp-glyph {
+  color: var(--color-amber-glow);
+  font-weight: 700;
+}
+
+/* ───────────────────────────────────────────────────────────
+   EOF marker — footer signature
+   ─────────────────────────────────────────────────────────── */
+.eof-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px dashed color-mix(in srgb, var(--color-amber-dim) 50%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-amber-dim);
+}
+.eof-mark::before {
+  content: '▮';
+  color: var(--color-amber-glow);
+}

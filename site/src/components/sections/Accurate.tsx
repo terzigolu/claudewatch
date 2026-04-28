@@ -11,17 +11,27 @@ export function Accurate() {
   const usage = { input: 100_000, output: 100_000, cacheRead: 0 };
 
   return (
-    <section className="border-t border-amber-dim/20 px-4 sm:px-6 lg:px-8 py-16 lg:py-20 bg-black/20">
-      <h2 className="font-display text-3xl">
+    <section className="border-t border-amber-dim/20 px-4 sm:px-6 lg:px-8 py-16 lg:py-20 bg-black/30">
+      <div className="section-divider">
+        <span className="section-locator">
+          <span className="sl-mark">§</span>
+          <span>04</span>
+          <span className="sl-divider">/</span>
+          <span>pricing.dat</span>
+        </span>
+      </div>
+      <h2 className="font-display text-3xl sm:text-4xl leading-tight">
         Opus output is <span className="text-amber-glow">19×</span> more expensive than Haiku.
       </h2>
-      <p className="mt-3 text-amber-cream/85">
-        Most tools estimate. We don&apos;t.
+      <p className="mt-3 font-mono text-amber-cream/85">
+        <span className="text-amber-dim">›</span> Most tools estimate. We don&apos;t.
       </p>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[2fr_1fr]">
-        {/* Pricing table */}
-        <div className="overflow-x-auto border border-amber-dim/30">
+        {/* Pricing table — wrapped with corner brackets */}
+        <div className="cb overflow-x-auto border border-amber-dim/30 bg-black/40">
+          <span className="cb-bl" aria-hidden="true" />
+          <span className="cb-br" aria-hidden="true" />
           <table className="w-full font-mono text-sm">
             <thead>
               <tr className="border-b border-amber-dim/30 bg-black/40">
@@ -60,7 +70,7 @@ export function Accurate() {
         {/* Bar chart: same usage, different bills */}
         <div>
           <h3 className="font-mono text-xs uppercase tracking-widest text-amber-dim">
-            Same 100k input + 100k output
+            <span className="text-amber-glow">┌</span> Same 100k in + 100k out <span className="text-amber-glow">┐</span>
           </h3>
           <div className="mt-4 space-y-3">
             {ROWS.map((row) => {

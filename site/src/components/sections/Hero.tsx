@@ -46,9 +46,12 @@ export function Hero() {
 
         {/* Right: copy + CTAs */}
         <div className="flex flex-col justify-center">
-          <p className="font-mono text-xs uppercase tracking-widest text-amber-dim">
-            [ ccwatch v1.0.1 ]
-          </p>
+          <span className="section-locator self-start">
+            <span className="sl-mark">§</span>
+            <span>01</span>
+            <span className="sl-divider">/</span>
+            <span>ccwatch v1.0.1</span>
+          </span>
           <h1 className="mt-3 font-display text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
             <GlitchText>watch the meter,</GlitchText>
             <br />

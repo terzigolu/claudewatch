@@ -37,8 +37,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="font-mono text-xs text-amber-dim">
-          MIT 2026 · ccwatch
+        <div className="flex items-center gap-3 font-mono text-xs text-amber-dim">
+          <span>MIT 2026 · ccwatch</span>
+          <span className="eof-mark">eof</span>
         </div>
       </div>
     </footer>

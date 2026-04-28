@@ -51,7 +51,18 @@ export function Demo() {
   };
 
   return (
-    <section className="border-t border-amber-dim/20 px-4 sm:px-6 lg:px-8 py-16 lg:py-20" id="demo">
+    <section
+      className="tx-dot-grid border-t border-amber-dim/20 px-4 sm:px-6 lg:px-8 py-16 lg:py-20"
+      id="demo"
+    >
+      <div className="section-divider">
+        <span className="section-locator">
+          <span className="sl-mark">§</span>
+          <span>02</span>
+          <span className="sl-divider">/</span>
+          <span>config.panel</span>
+        </span>
+      </div>
       <h2 className="font-mono text-sm uppercase tracking-widest text-amber-dim">
         // Build your statusline
       </h2>
@@ -107,12 +118,20 @@ export function Demo() {
           </div>
         </div>
 
-        {/* Right: preview */}
+        {/* Right: preview — wrapped in TUI window */}
         <div className="space-y-3">
-          <h3 className="font-mono text-xs uppercase tracking-widest text-amber-dim">
-            Preview
-          </h3>
-          <StatuslineMock />
+          <div className="tui-window">
+            <div className="tui-window-bar">
+              <span className="tui-window-dots" aria-hidden="true">
+                <span /><span /><span />
+              </span>
+              <span>preview · live</span>
+              <span className="opacity-60">tty/01</span>
+            </div>
+            <div className="tui-window-body">
+              <StatuslineMock />
+            </div>
+          </div>
           <button
             type="button"
             onClick={() => setShowJson((v) => !v)}

@@ -18,7 +18,15 @@ const CARDS = [
 
 export function WhyFast() {
   return (
-    <section className="border-t border-amber-dim/20 px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+    <section className="tx-ledger border-t border-amber-dim/20 px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div className="section-divider">
+        <span className="section-locator">
+          <span className="sl-mark">§</span>
+          <span>03</span>
+          <span className="sl-divider">/</span>
+          <span>benchmark.log</span>
+        </span>
+      </div>
       <h2 className="font-mono text-sm uppercase tracking-widest text-amber-dim">
         // Why it&apos;s fast
       </h2>
@@ -28,15 +36,19 @@ export function WhyFast() {
       </p>
 
       <div className="mt-10 grid gap-4 md:grid-cols-3">
-        {CARDS.map((card) => (
+        {CARDS.map((card, i) => (
           <article
             key={card.title}
-            className="group border border-amber-dim/30 bg-black/30 p-6 transition-all hover:border-amber-primary hover:shadow-[0_0_24px_rgba(255,176,0,0.15)]"
+            className="group relative border border-amber-dim/30 bg-black/40 p-6 transition-all hover:border-amber-primary hover:shadow-[0_0_24px_rgba(255,176,0,0.15)]"
           >
-            <h3 className="font-mono text-amber-primary">{card.title}</h3>
+            <span className="card-tab">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3 className="mt-4 font-mono text-amber-primary">{card.title}</h3>
             <p className="mt-3 text-amber-cream/85 leading-relaxed">{card.quote}</p>
-            <div className="mt-4 font-mono text-xs uppercase tracking-wider text-amber-glow">
-              {card.stat}
+            <div className="mt-4 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-amber-glow">
+              <span aria-hidden="true">→</span>
+              <span>{card.stat}</span>
             </div>
           </article>
         ))}
