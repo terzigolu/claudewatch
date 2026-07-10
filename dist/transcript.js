@@ -1,7 +1,7 @@
 // ccwatch — per-file mtime cache so the statusline doesn't rescan
 // the entire ~/.claude/projects tree on every render. Cuts cold-render
 // time from ~3.7s to ~0.9s on a typical workstation.
-import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { estimateCost } from "./pricing.js";
@@ -50,13 +50,15 @@ async function loadCache() {
 async function saveCache() {
     if (!_cache || !_cacheDirty)
         return;
+    const tmpPath = `${CACHE_PATH}.${process.pid}.tmp`;
     try {
         await mkdir(CACHE_DIR, { recursive: true });
-        await writeFile(CACHE_PATH, JSON.stringify(_cache));
+        await writeFile(tmpPath, JSON.stringify(_cache));
+        await rename(tmpPath, CACHE_PATH);
         _cacheDirty = false;
     }
     catch {
-        // best-effort
+        await rm(tmpPath, { force: true }).catch(() => { });
     }
 }
 async function readEntriesCached(filePath) {

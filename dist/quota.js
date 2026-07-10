@@ -1,6 +1,6 @@
 import { execFile } from "node:child_process";
 import crypto from "node:crypto";
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, rename, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
@@ -56,7 +56,15 @@ async function readQuotaCache(cachePath = QUOTA_CACHE_PATH) {
     }
 }
 async function writeQuotaCache(cache, cachePath = QUOTA_CACHE_PATH) {
-    await writeFile(`${cachePath}`, `${JSON.stringify(cache)}\n`, "utf8");
+    const tmpPath = `${cachePath}.${process.pid}.tmp`;
+    try {
+        await writeFile(tmpPath, `${JSON.stringify(cache)}\n`, "utf8");
+        await rename(tmpPath, cachePath);
+    }
+    catch (error) {
+        await rm(tmpPath, { force: true }).catch(() => { });
+        throw error;
+    }
 }
 async function fetchQuotaFromApi(token) {
     const response = await fetch(QUOTA_API_ENDPOINT, {
